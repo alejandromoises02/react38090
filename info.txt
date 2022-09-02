@@ -1,0 +1,12 @@
+Componente Funcionales
+    -Importar react(opcional)
+    -Crear una funcion 
+    -El nombre de la funcion debe comenzar con mayuscula
+    -La funcion debe retornar algo
+    -Exportar el componente
+
+Todo componente puede tener
+    -props
+    -states
+    -Ciclo de vida
+    -Metodos del ciclo de vida
