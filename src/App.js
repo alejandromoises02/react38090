@@ -1,19 +1,16 @@
 import React from "react";
-import Header from "./Components/Header/Header"
-import { Boton } from "./Components/Boton"
-import { Title } from "./Components/Title"
+import Navbar from "./Components/Navbar/Navbar"
+import ItemListContainer from "./Containers/ItemListContainer/ItemListContainer";
 
 const App = () => {
 
-  const nombreUsuario = "Alejandro";
-  const apellidoUsuario = "Fernandez"
+  const mensaje = "hola a todos los que visitan esta pagina"
 
   return (
     <>
-      <Header nombre={nombreUsuario} id="1" apellido={apellidoUsuario}>
-        <Boton />
-        <Title />
-      </Header>
+      <Navbar />
+      <ItemListContainer 
+      greeting={mensaje}/>
     </>
   )
 }

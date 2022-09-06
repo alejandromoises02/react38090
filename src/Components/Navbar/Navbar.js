@@ -1,10 +1,10 @@
 import React from 'react'
 import logo from '../../assets/logo.png'
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import CartWidget from '../Cartidget/CartWidget';
 import { Nav } from './Nav/Nav';
 
 
-const Header = ({ nombre, apellido, id, children }) => {
+const Navbar = ({ nombre, apellido, id, children }) => {
 
     const categorias = [
         { id: 0, nombre: 'Categoria 1' },
@@ -18,7 +18,7 @@ const Header = ({ nombre, apellido, id, children }) => {
             <img style={styles.imagen} src={logo} alt="logo" />
             <h1>Bienvenido {nombre}</h1>
             <Nav categorias={categorias}/>
-            <ShoppingCartIcon color="success" fontSize="large" />
+            <CartWidget />
         </header>
     )
 }
@@ -35,4 +35,4 @@ const styles = {
     },
 }
 
-export default Header
+export default Navbar
