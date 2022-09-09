@@ -1,9 +1,23 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
-const MiComponente = ({stock,funcion}) => {
+const MiComponente = () => {
 
   const [contador, setContador] = useState(0);
-  
+  const [numero, setNumero] = useState(0);
+
+  useEffect(()=>{
+    setNumero(numero + 1);
+
+    const intervalo = setInterval(()=>{
+      console.log("ping");
+    },1000)
+
+    return (()=>{
+      clearInterval(intervalo);
+    })
+
+  },[contador]);
+
   const sumar = () => {
     setContador(contador + 1);
   }
@@ -14,7 +28,6 @@ const MiComponente = ({stock,funcion}) => {
 
   const reset = () => {
     setContador(0);
-    funcion(contador);
   }
 
   return (
@@ -24,6 +37,7 @@ const MiComponente = ({stock,funcion}) => {
       <button onClick={sumar}>sumar</button>
       <button onClick={restar}>restar</button>
       <button onClick={reset}>agregar al carrito</button>
+      <h1>{numero}</h1>
     </>
   )
 }

@@ -10,3 +10,35 @@ Todo componente puede tener
     -states
     -Ciclo de vida
     -Metodos del ciclo de vida
+
+Ciclo de vida y Metodos
+
+    -mount:
+        -constructor
+        -render
+        -componentDidMount
+
+    -update
+        -constructor
+        -render
+        -componentDidUpdate
+
+    -unmount
+        -componentWillUnmount
+
+UseEffect
+
+//En este formato solo se ejecuta con el montaje
+useEffect(()=>{
+    //bloque de codigo
+  },[]);
+
+//En este formato se ejecuta con el montaje y actualizacion
+useEffect(()=>{
+    //bloque de codigo
+  });
+
+  /En este formato se ejecuta con el montaje y actualizacion solo si los valores del array cambian
+useEffect(()=>{
+    //bloque de codigo
+  },[valores]);

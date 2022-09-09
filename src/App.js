@@ -1,26 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "./Components/Navbar/Navbar"
 import ItemListContainer from "./Containers/ItemListContainer/ItemListContainer";
 import MiComponente from "./MiComponente";
-import Usuarios from "./Usuarios";
 
 const App = () => {
 
   const dash = "Las mejores ofertas";
 
-  const onAdd = (count) => {
-    console.log("Un mensaje");
+  const [show, setShow] = useState(true);
+
+  const alternar = () =>{
+    setShow(!show);
   }
 
   return (
     <>
       <Navbar />
       <ItemListContainer greeting={dash}/>
-      <MiComponente stock={5} onAdd={onAdd}/>
-      <Usuarios />
+      {show ? <MiComponente/> : <h1>No hay nada</h1>}
+      <button onClick={alternar}>Alternar</button>
     </>
   )
 }
 
 export default App
-
