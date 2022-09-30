@@ -1,9 +1,20 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 export const Context = createContext();
 
+
 const CustomProvider = ({ children }) => {
-  const [cart, setCart] = useState([{ nombre: "juan" }]);
+  const [cart, setCart] = useState([]);
+  const [cantidad, setCantidad] = useState(0);
+
+  useEffect(() => {
+    let cantidad = 0;
+    cart.forEach((producto)=>
+      cantidad = cantidad + producto.qty
+    )
+    setCantidad(cantidad);
+  }, [cart])
+  
 
   const añadir = (producto, cantidad) => {
     if (estaEnLista(producto.id)) {
@@ -26,8 +37,17 @@ const CustomProvider = ({ children }) => {
     setCart([]);
   };
 
+
   return (
-    <Context.Provider value={{ cart, añadir, borrar, reset }}>
+    <Context.Provider
+      value={{
+        cantidad,
+        cart,
+        añadir,
+        borrar,
+        reset,
+      }}
+    >
       {children}
     </Context.Provider>
   );
