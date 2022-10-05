@@ -82,3 +82,7 @@ useEffect(()=>{
     .then().catch()
 
     fetch(url).then().catch()
+
+
+    Sql Relacionales
+    No Sql No Relaciones

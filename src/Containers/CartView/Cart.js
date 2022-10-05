@@ -1,27 +1,35 @@
 import React, { useContext } from "react";
 import { Context } from "../../Context/CustomContext";
 import { Link } from "react-router-dom";
-import "./Cart.css";
 
-export const Cart = ({ condicion, estilo }) => {
-  const { cart } = useContext(Context);
+export const Cart = () => {
+  const { cart, total, deleteProduct, resetCart } = useContext(Context);
+  console.log(cart);
 
   return (
     <>
       {cart.length === 0 ? (
-        <>
-          <h1 className={condicion ? "rojo" : "azul"}>
-            No agregaste productos, puedes ver <Link to="/">aca</Link>
-          </h1>
-          <h2 className={`tamanio ${estilo || ''}`}>
-            Gracias por tu visita
-          </h2>
-        </>
+        <h1>
+          No agregaste productos, puedes ver <Link to="/">aca</Link>
+        </h1>
       ) : (
         <>
-          {cart.map((producto) => {
-            return <h1 key={producto.id}>{producto.title}</h1>;
-          })}
+          {cart.map((item) => (
+            <div key={item.product.id}>
+              <h1>{item.product.title}</h1>
+              <h1>Precio Unitario: {item.product.price}</h1>
+              <h1>Cantidad: {item.qtyProduct}</h1>
+              <button
+                onClick={() => {
+                  deleteProduct(item.product.id);
+                }}
+              >
+                Eliminar del Carrito
+              </button>
+            </div>
+          ))}
+          <h3>Total: {total.toFixed(2)}</h3>
+          <button onClick={resetCart}>Vaciar Carrito</button>
         </>
       )}
     </>

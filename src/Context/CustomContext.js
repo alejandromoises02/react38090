@@ -1,51 +1,62 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState } from "react";
 
 export const Context = createContext();
 
-
 const CustomProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
-  const [cantidad, setCantidad] = useState(0);
+  const [qty, setQty] = useState(0);
+  const [total, setTotal] = useState(0);
 
-  useEffect(() => {
-    let cantidad = 0;
-    cart.forEach((producto)=>
-      cantidad = cantidad + producto.qty
-    )
-    setCantidad(cantidad);
-  }, [cart])
-  
-
-  const añadir = (producto, cantidad) => {
-    if (estaEnLista(producto.id)) {
-      //se los dejo
+  const addProduct = (product, qtyProduct) => {
+    if (isInCart(product.id)) {
+      setCart(
+        cart.map((item) => {
+          if (item.product.id === product.id) {
+            return {
+              product: item.product,
+              qtyProduct: item.qtyProduct + qtyProduct,
+            };
+          }
+          return item;
+        })
+      );
     } else {
-      setCart([...cart, { producto, cantidad }]);
+      setCart([...cart, { product, qtyProduct }]);
     }
+    setQty(qty + qtyProduct);
+    setTotal(total + ( qtyProduct * product.price ));
   };
 
-  const borrar = (id) => {
-    const arrayFiltrado = cart.filter((producto) => {
-      return producto.id !== id;
-    });
-    setCart(arrayFiltrado);
+  const deleteProduct = (id) => {
+    const productCart = cart.find((item)=>item.product.id === id);
+    console.log(id);
+    console.log(productCart);
+    setCart(
+      cart.filter((item) => {
+        return item.product.id !== id;
+      })
+    );
+    setQty(qty - productCart.qtyProduct);
+    setTotal(total - ( productCart.qtyProduct * productCart.product.price))
   };
 
-  const estaEnLista = (id) => cart.some((producto) => producto.id === id);
+  const isInCart = (id) => cart.some((item) => item.product.id === id);
 
-  const reset = () => {
+  const resetCart = () => {
     setCart([]);
+    setQty(0);
+    setTotal(0);
   };
-
 
   return (
     <Context.Provider
       value={{
-        cantidad,
         cart,
-        añadir,
-        borrar,
-        reset,
+        qty,
+        total,
+        addProduct,
+        deleteProduct,
+        resetCart,
       }}
     >
       {children}
