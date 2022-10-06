@@ -29,8 +29,6 @@ const CustomProvider = ({ children }) => {
 
   const deleteProduct = (id) => {
     const productCart = cart.find((item)=>item.product.id === id);
-    console.log(id);
-    console.log(productCart);
     setCart(
       cart.filter((item) => {
         return item.product.id !== id;

@@ -15,7 +15,7 @@ const ItemListContainer = ({ greeting }) => {
     const productsCollection = collection(db, "products");
     const q = query(productsCollection, where("category", "==", "jewelery"));
 
-    getDocs(q)
+    getDocs(productsCollection)
       .then((data) => {
         const lista = data.docs.map((product) => {
           return {
@@ -54,3 +54,26 @@ const styles = {
 };
 
 export default ItemListContainer;
+
+
+/*const getProducts = async ()=>{
+      try{
+        const data = await getDocs(productsCollection);
+        const lista = data.docs.map((product) => {
+          return {
+            ...product.data(),
+            id: product.id,
+          };
+        });
+        setProducts(lista);
+      }
+      catch{
+        setError(true);
+      }
+      finally{
+        setLoading(false);
+      }
+      
+    }
+
+    getProducts();*/

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Context } from '../../Context/CustomContext'
 
 export const ItemDetail = ({ product }) => {
-  console.log(product);
   const [isButtonpPressed, setIsButtonpPressed] = useState(false);
   const { addProduct } = useContext(Context);
 
