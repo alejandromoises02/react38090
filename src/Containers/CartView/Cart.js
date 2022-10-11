@@ -23,13 +23,16 @@ export const Cart = () => {
     })
     .then(result=>{
       console.log(result.id);
+      cart.forEach(producto => {
+        actualizarStock(producto);
+      });
       resetCart();
     })
   }
 
-  const actualizarStock = () =>{
-    const updateStock = doc(db, "products", "Uh9qa5rZhfhAgnugRQAx");
-    updateDoc(updateStock,{stock:50});
+  const actualizarStock = (producto) =>{
+    const updateStock = doc(db, "products", producto.id);
+    updateDoc(updateStock,{stock:(producto.product.stock - producto.qtyProduct)});
   }
 
   return (
@@ -56,7 +59,7 @@ export const Cart = () => {
           ))}
           <h3>Total: {total.toFixed(2)}</h3>
           <button onClick={resetCart}>Vaciar Carrito</button>
-          <button onClick={actualizarStock}>Finalizar Compra</button>
+          <button onClick={finalizarCompra}>Finalizar Compra</button>
         </>
       )}
     </>
